@@ -53,16 +53,8 @@ self.addEventListener('activate', function (event) {
         })
     );
 });
-self.addEventListener('push', function (e) {
-    self.registration.sendNotification('Test message', {})
-});
 
-self.addEventListener('notificationclose', function (e) {
-    var notification = e.notification;
-    var primaryKey = notification.data.primaryKey;
 
-    console.log('Closed notification: ' + primaryKey);
-});
 
 self.addEventListener('notificationclick', function (e) {
     var notification = e.notification;
@@ -75,6 +67,38 @@ self.addEventListener('notificationclick', function (e) {
         clients.openWindow('http://www.facebook.com');
         notification.close();
     }
+});
+
+
+// self.addEventListener('notificationclose', function (e) {
+//     var notification = e.notification;
+//     var primaryKey = notification.data.primaryKey;
+
+//     console.log('Closed notification: ' + primaryKey);
+// });
+self.addEventListener('push', function (e) {
+    var options = {
+        body: 'Here is a notification body!',
+        icon: 'https://lh3.googleusercontent.com/j5Qh64sO4UGPG3yaNELSwCbk1ZraNxFyVly2W5Qz9IpZUZ5Xvo6_jpF-E6PLzdj_u4RRre90pw=w128-h128-e365',
+        vibrate: [100, 50, 100],
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+        },
+        actions: [
+            {
+                action: 'explore', title: 'Explore this new world',
+                icon: 'https://lh3.googleusercontent.com/j5Qh64sO4UGPG3yaNELSwCbk1ZraNxFyVly2W5Qz9IpZUZ5Xvo6_jpF-E6PLzdj_u4RRre90pw=w128-h128-e365',
+            },
+            {
+                action: 'close', title: 'Close notification',
+                icon: 'https://lh3.googleusercontent.com/j5Qh64sO4UGPG3yaNELSwCbk1ZraNxFyVly2W5Qz9IpZUZ5Xvo6_jpF-E6PLzdj_u4RRre90pw=w128-h128-e365',
+            },
+        ]
+    };
+    e.waitUntil(
+        self.registration.showNotification('Hello world!', options)
+    );
 });
 // console.log('Started', self);
 // self.addEventListener('install', function (event) {
