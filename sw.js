@@ -64,7 +64,7 @@ self.addEventListener('notificationclick', function (e) {
     if (action === 'close') {
         notification.close();
     } else {
-        clients.openWindow('http://www.facebook.com');
+        clients.openWindow('https://suspicious-brattain-78b6ab.netlify.app/');
         notification.close();
     }
 });
