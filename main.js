@@ -1,6 +1,6 @@
-Notification.requestPermission(function (status) {
-  console.log('Notification permission status:', status);
-});
+// Notification.requestPermission(function (status) {
+//   console.log('Notification permission status:', status);
+// });
 
 
 

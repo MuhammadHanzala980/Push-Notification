@@ -5,35 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyCf4iEyGbEjTYorn8ETyUXHDMgH6D5Gvc8",
-      authDomain: "quiz-app-11226.firebaseapp.com",
-      databaseURL: "https://quiz-app-11226.firebaseio.com",
-      projectId: "quiz-app-11226",
-      storageBucket: "quiz-app-11226.appspot.com",
-      messagingSenderId: "910528359307",
-      appId: "1:910528359307:web:c7de5d2d2323e1cbeb9d8e"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
 </head>
 
 <body>
   <button onclick="displayNotification()">displayNotification</button>
   <button onclick="subscribe()">subscribeUser</button>
 </body>
-<script src="./main.js"></script>
+<!-- <script src="./main.js"></script> -->
 <script src="./sw.js"></script>
-<script src='./push.js'></script>
+<script src="./push.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
@@ -44,6 +24,17 @@
       });
     });
   }
+
+  async function subscribe() {
+    let sw = await navigator.serviceWorker.ready
+    let push = await sw.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: 'BLOrh-N6qjdfJRi0CMylhUJ6EyONR93_hhsxE_BNIBQG9-BoG9IQwFanXGpDfT02UapL_SURFykf5j95qHSWbSg'
+    })
+    console.log(JSON.stringify(push))
+  }
+
+
 </script>
 
 </html>
